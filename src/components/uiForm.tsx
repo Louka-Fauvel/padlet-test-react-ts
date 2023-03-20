@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 
 export default class UIForm extends React.Component<{fields:string[], submit:any}, {data:any}> {
 
@@ -13,7 +13,7 @@ export default class UIForm extends React.Component<{fields:string[], submit:any
 
     render() {
         return (
-            <form onChange={this.handleChange} onSubmit={() => this.props.submit(this.state.data)}>
+            <form onChange={this.handleChange} onSubmit={(evt:FormEvent<HTMLFormElement>) => this.props.submit(this.state.data, evt)}>
                 {this.props.fields.map((field:string) => {
                     return <input type="text" name={field}/>
                 })}

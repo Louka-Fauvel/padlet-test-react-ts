@@ -18,14 +18,16 @@ export default class UiList extends React.Component<{attr:string, objects:any[],
     }
 
     render() {
-        const updateObject = (object:any) =>{
-            HttpService.post(API_URL+'users_', object).then((data:any) => {
-                this.setState({objects:[...this.state.objects, data]});
+        const updateObject = (object:any, event:any) =>{
+            event.preventDefault();
+            debugger;
+            HttpService.post(API_URL+'user_', object).then((data:any) => {
+                this.setState({objects:[...this.state.objects, data.data]});
             });
         }
         return (
             <>
-                <UIForm fields={["login", "email"]} submit={updateObject}/>
+                <UIForm fields={["login", "email", "password"]} submit={updateObject}/>
                 <ul>
                     {
                         this.state.objects.map((object:any, index:number) => {
